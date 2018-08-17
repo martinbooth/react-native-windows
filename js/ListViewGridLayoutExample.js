@@ -4,23 +4,16 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow
- * @providesModule ListViewGridLayoutExample
+ * @format
+ * @flow strict-local
  */
+
 'use strict';
 
 var React = require('react');
 var createReactClass = require('create-react-class');
 var ReactNative = require('react-native');
-var {
-  Dimensions,
-  Image,
-  ListView,
-  TouchableHighlight,
-  StyleSheet,
-  Text,
-  View,
-} = ReactNative;
+var {Dimensions, Image, ListView, TouchableHighlight, StyleSheet, Text, View} = ReactNative;
 
 var THUMB_URLS = [
   require('./Thumbnails/like.png'),
@@ -48,7 +41,7 @@ var ListViewGridLayoutExample = createReactClass({
 
   statics: {
     title: '<ListView> - Grid Layout',
-    description: 'Flexbox grid layout.'
+    description: 'Flexbox grid layout.',
   },
 
   getInitialState: function() {
@@ -95,13 +88,13 @@ var ListViewGridLayoutExample = createReactClass({
     var rowHash = Math.abs(hashCode(rowData));
     var imgSource = THUMB_URLS[rowHash % THUMB_URLS.length];
     return (
-      <TouchableHighlight onPress={() => this._pressRow(rowID)} underlayColor="transparent">
+      <TouchableHighlight
+        onPress={() => this._pressRow(rowID)}
+        underlayColor="transparent">
         <View>
           <View style={styles.row}>
             <Image style={styles.thumb} source={imgSource} />
-            <Text style={styles.text}>
-              {rowData}
-            </Text>
+            <Text style={styles.text}>{rowData}</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -119,9 +112,11 @@ var ListViewGridLayoutExample = createReactClass({
 
   _pressRow: function(rowID: number) {
     this._pressData[rowID] = !this._pressData[rowID];
-    this.setState({dataSource: this.state.dataSource.cloneWithRows(
-      this._genRows(this._pressData)
-    )});
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(
+        this._genRows(this._pressData),
+      ),
+    });
   },
 });
 
@@ -129,7 +124,7 @@ var ListViewGridLayoutExample = createReactClass({
 var hashCode = function(str) {
   var hash = 15;
   for (var ii = str.length - 1; ii >= 0; ii--) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(ii);
+    hash = (hash << 5) - hash + str.charCodeAt(ii);
   }
   return hash;
 };
@@ -139,7 +134,7 @@ var styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   row: {
     justifyContent: 'center',
@@ -151,16 +146,16 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: '#CCC'
+    borderColor: '#CCC',
   },
   thumb: {
     width: 64,
-    height: 64
+    height: 64,
   },
   text: {
     flex: 1,
     marginTop: 5,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 });
 
